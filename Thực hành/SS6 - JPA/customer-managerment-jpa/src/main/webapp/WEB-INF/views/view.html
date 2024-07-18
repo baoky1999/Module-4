@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{layout::linkBootstrap}"></th:block>
+</head>
+<body>
+<div class="container">
+    <h3>View Customer</h3>
+    <p>
+        <a class="btn btn-primary" th:href="@{/customerjpa}">
+            Back to Customer list
+        </a>
+    </p>
+    <div style="font-size: 20px; font-weight: bold">
+        <div class="cus-detail">
+            <label>Name:</label>
+            <label th:text="${customer.name}"></label>
+        </div>
+        <div class="cus-detail">
+            <label>Email:</label>
+            <label th:text="${customer.email}"></label>
+        </div>
+        <div class="cus-detail">
+            <label>Address:</label>
+            <label th:text="${customer.address}"></label>
+        </div><br>
+    </div>
+<th:block th:replace="~{layout::footter}"></th:block>
+</body>
+</html>

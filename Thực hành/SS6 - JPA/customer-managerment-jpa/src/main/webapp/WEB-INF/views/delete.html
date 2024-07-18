@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{layout::linkBootstrap}"></th:block>
+</head>
+<body>
+<div class="container">
+    <h3>Remove Customer</h3>
+    <p>
+        <a class="btn btn-primary" th:href="@{/customerjpa}">
+            Back to Customer list
+        </a>
+    </p>
+    <form  action="#" th:action="@{/customerjpa/delete}" th:object="${customer}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="form-control mb-3">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" id="name" th:field="*{name}"/>
+        </div>
+        <div class="form-control mb-3">
+            <label for="email">Email</label>
+            <input class="form-control" type="text" id="email" th:field="*{email}"/>
+        </div>
+        <div class="form-control mb-3">
+            <label for="address">Address</label>
+            <input class="form-control" type="text" id="address" th:field="*{address}"/>
+        </div>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Delete
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>You want to delete a product whose name is <span th:text="${customer.name}"></span></h4>
+                        <h4 style="color: red">This action cannot be undone!!!</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<th:block th:replace="~{layout::footter}"></th:block>
+</body>
+</html>

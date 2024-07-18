@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{layout::linkBootstrap}"></th:block>
+</head>
+<body>
+<div class="container">
+    <h1>Customer List</h1>
+    <p>
+        <a class="btn btn-success" style="float: left" th:href="@{/customerjpa/create}">
+            Add new Customer
+        </a>
+    <form class="d-flex" style="width: 400px; margin-left: 1000px" action="/customerjpa/search" method="get">
+        <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    </p>
+    <div class="notify">
+        <div th:if="${success}">
+            <span th:text="${success}"></span>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <th>View Detail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="customer,status:${customerList}">
+                <td th:text="${status.count}"></td>
+                <td th:text="${customer.getName()}"></td>
+                <td th:text="${customer.getEmail()}"></td>
+                <td th:text="${customer.getAddress()}"></td>
+                <td><a class="btn btn-warning" th:href="@{/customerjpa/{id}/edit(id=${customer.getId()})}">Edit</a></td>
+                <td><a class="btn btn-danger" th:href="@{/customerjpa/{id}/delete(id=${customer.getId()})}">Delete</a></td>
+                <td><a class="btn btn-info" th:href="@{/customerjpa/{id}/view(id=${customer.getId()})}">View Detail</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    <th:block th:replace="~{layout::footter}"></th:block>
+</body>
+</html>

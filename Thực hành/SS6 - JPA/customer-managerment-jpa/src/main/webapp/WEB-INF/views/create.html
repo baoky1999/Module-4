@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Customer</title>
+    <th:block th:replace="~{layout::linkBootstrap}"></th:block>
+</head>
+<body>
+<div class="container">
+    <h1>Create Customer</h1>
+    <div>
+        <p>
+            <a class="btn btn-primary" style="float: left" th:href="@{/customerjpa}">
+                Back to customer list
+            </a>
+        </p>
+    </div>
+    <div>
+        <form style="margin-top: 80px" class="form-control mb-3" th:action="@{/customerjpa/create}" th:object="${customer}" method="post" novalidate="novalidate">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-control mb-3">
+                <label for="name">Name Customer</label>
+                <input class="form-control" type="text" id="name" th:field="*{name}"/>
+            </div>
+            <div class="form-control mb-3">
+                <label for="email">Email Customer</label>
+                <input class="form-control" type="text" id="email" th:field="*{email}"/>
+            </div>
+            <div class="form-control mb-3">
+                <label for="address">Address Customer</label>
+                <input class="form-control" type="text" id="address" th:field="*{address}"/>
+            </div>
+            <button class="btn btn-success mb-3" type="submit">Save Customer</button>
+        </form>
+    </div>
+</div>
+<th:block th:replace="~{layout::footter}"></th:block>
+</body>
+</html>
