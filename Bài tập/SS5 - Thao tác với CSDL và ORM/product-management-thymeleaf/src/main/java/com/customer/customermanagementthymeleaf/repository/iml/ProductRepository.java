@@ -33,10 +33,7 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public void update(int id, Product product) {
-        EntityTransaction transaction = BaseRepository.entityManager.getTransaction();
-        transaction.begin();
-        BaseRepository.entityManager.merge(product);
-        transaction.commit();
+        BaseRepository.entityManager.persist(product);
     }
 
     @Override
