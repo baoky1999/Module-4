@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <th:block th:replace="~{bootstrap::linkBootstrap}">
+    </th:block>
+</head>
+<body>
+<div class="container">
+    <div>
+        <h1>Blog Personal</h1>
+        <p>
+            <a class="btn btn-success" style="float: left" th:href="@{/blog/create}">Add new Customer</a>
+
+        <form class="d-flex" style="width: 400px; margin-left: 1000px" action="/blog/search" method="get">
+            <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        </p>
+    </div>
+    <div class="notify">
+        <div th:if="${success}">
+            <span th:text="${success}"></span>
+        </div>
+    </div>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Author</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Blog Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="blog,status:${blogList}">
+                    <td th:text="${status.count}"></td>
+                    <td th:text="${blog.getTitle()}"></td>
+                    <td th:text="${blog.getContent()}"></td>
+                    <td th:text="${blog.getAuthor()}"></td>
+                    <td><a class="btn btn-warning" th:href="@{blog/{id}/edit(id=${blog.getId()})}">Edit</a></td>
+                    <td><a class="btn btn-danger" th:href="@{blog/{id}/delete(id=${blog.getId()})}">Delete</a></td>
+                    <td><a class="btn btn-info" th:href="@{blog/{id}/view(id=${blog.getId()})}">Blog Detail</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <th:block th:replace="~{bootstrap::footter}"></th:block>
+</div>
+</body>
+</html>

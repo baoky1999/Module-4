@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Blog</title>
+    <th:block th:replace="~{bootstrap::linkBootstrap}">
+    </th:block>
+</head>
+<body>
+<div class="container">
+    <h1>Create Blog</h1>
+    <div>
+        <p>
+            <a class="btn btn-primary" style="float: left" th:href="@{/blog}">
+                Back to Blog list
+            </a>
+        </p>
+    </div>
+    <div>
+        <form style="margin-top: 80px" class="form-control mb-3" th:action="@{/blog/create}" th:object="${blog}" method="post" novalidate="novalidate">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-control mb-3">
+                <label for="title">Title : </label>
+                <input class="form-control" type="text" id="title" th:field="*{title}"/>
+            </div>
+            <div class="form-control mb-3">
+                <label for="content">Content : </label>
+                <input class="form-control" type="text" id="content" th:field="*{content}"/>
+            </div>
+            <div class="form-control mb-3">
+                <label for="author">Author : </label>
+                <input class="form-control" type="text" id="author" th:field="*{author}"/>
+            </div>
+            <div class="form-control mb-3">
+                <label for="description">Description : </label>
+                <textarea class="form-control" type="text" id="description" contenteditable="true" rows="10" th:field="*{description}"></textarea>
+            </div>
+            <button class="btn btn-success mb-3" type="submit">Save Blog</button>
+        </form>
+    </div>
+</div>
+<th:block th:replace="~{bootstrap::footter}"></th:block>
+</body>
+</html>
