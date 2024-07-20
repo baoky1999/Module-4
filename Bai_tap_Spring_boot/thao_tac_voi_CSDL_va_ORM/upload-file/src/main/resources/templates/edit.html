@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Song</title>
+</head>
+<body>
+<p>
+    <a th:href="@{/songs}">Back list</a>
+</p>
+<form action="#" th:href="@{/songs/edit}" th:object="${song}" method="post" novalidate="novalidate">
+    <input type="hidden" th:field="*{id}"/>
+    <div>
+        <label for="songName">SongName : </label>
+        <input class="form-control" type="text" id="songName" th:field="*{songName}"/>
+    </div>
+    <div>
+        <label for="artist">Artist : </label>
+        <input class="form-control" type="text" id="artist" th:field="*{artist}"/>
+    </div>
+    <div>
+        <label for="genre">Genre : </label>
+        <input class="form-control" type="text" id="genre" th:field="*{genre}"/>
+    </div>
+    <div>
+        <label for="filePath">FilePath : </label>
+        <input class="form-control" type="text" id="filePath" th:field="*{filePath}"/>
+    </div>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
