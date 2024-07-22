@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Delete Blog</title>
-    <th:block th:replace="~{bootstrap::linkBootstrap}">
-    </th:block>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous" async></script>
 </head>
 <body>
 <div class="container">
@@ -33,6 +36,10 @@
             <label for="description">Description : </label>
             <textarea class="form-control" type="text" id="description" contenteditable="true" rows="10" th:field="*{description}"></textarea>
         </div>
+        <div class="form-control mb-3">
+            <label class="form-label" for="category">Category : </label>
+            <input type="text" th:field="*{category.name}" id="category"/>
+        </div>
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Delete Blog
         </button>
@@ -44,7 +51,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <h4>You want to delete a blog whose name is <span th:text="${blog.name}"></span></h4>
+                        <h4>You want to delete a blog whose name is <span th:text="${blog.title}"></span></h4>
                         <h4 style="color: red">This action cannot be undone!!!</h4>
                     </div>
                     <div class="modal-footer">
@@ -56,6 +63,5 @@
         </div>
     </form>
 </div>
-<th:block th:replace="~{bootstrap::footter}"></th:block>
 </body>
 </html>
