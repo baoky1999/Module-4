@@ -5,6 +5,8 @@ import com.customer.customerprovincemanagement.model.Province;
 import com.customer.customerprovincemanagement.repository.ICustomerRepository;
 import com.customer.customerprovincemanagement.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,8 +17,18 @@ public class CustomerService implements ICustomerService {
     private ICustomerRepository customerRepository;
 
     @Override
+    public Page<Customer> findAll(Pageable pageable) {
+        return customerRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Customer> findAllByFirstNameContaining(Pageable pageable, String name) {
+        return customerRepository.findAllByFirstNameContaining(pageable, name);
+    }
+
+    @Override
     public Iterable<Customer> findAll() {
-        return customerRepository.findAll();
+        return null;
     }
 
     @Override
