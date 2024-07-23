@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{common/common::bootstrap}"></th:block>
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" async></script>-->
+</head>
+<body>
+<div class="container">
+    <h1>Registration form</h1>
+    <form action="#" th:href="@{register}" method="post" th:object="${userDto}" novalidate="novalidate">
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name : </label>
+            <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" th:field="*{firstName}" minlength="5" maxlength="45" required>
+                    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color: red; font-style: italic"></p>
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name : </label>
+            <input type="text" class="form-control" id="lastName" aria-describedby="emailHelp" th:field="*{lastName}" minlength="5" maxlength="45" required>
+                    <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" style="color: red; font-style: italic"></p>
+        </div>
+        <div class="mb-3">
+            <label for="phoneNumber" class="form-label">Phone Number : </label>
+            <input type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" th:field="*{phoneNumber}" pattern="^(?:0|84|\+84)?[1-9]\d{8}$" required>
+                    <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" style="color: red; font-style: italic"></p>
+        </div>
+        <div class="mb-3">
+            <label for="age" class="form-label">Age : </label>
+            <input type="number" class="form-control" id="age" aria-describedby="emailHelp" th:field="*{age}" min="18" required>
+                    <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color: red; font-style: italic"></p>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email : </label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{email}" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required>
+                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red; font-style: italic"></p>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

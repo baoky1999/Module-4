@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{common/common::bootstrap}"></th:block>
+</head>
+<body>
+<div class="container">
+    <h1>Create Song</h1>
+    <div>
+        <p>
+            <a class="btn btn-primary" style="float: left" th:href="@{/song_validation}">Back Song list</a>
+        </p>
+    </div>
+    <div style="margin-top: 100px">
+        <form th:href="@{song_validation/create}" th:object="${songDto}" method="post">
+            <div class="mb-3">
+                <label for="nameSong" class="form-label">Tên bài hát:</label>
+                <input type="text" class="form-control" id="nameSong" th:field="*{nameSong}" maxlength="800" required pattern="^[^@;,.=+\-…]*$">
+                <p th:if="${#fields.hasErrors('nameSong')}" th:errors="*{nameSong}" style="color: red; font-style: italic"></p>
+            </div>
+            <div class="mb-3">
+                <label for="singer" class="form-label">Nghệ sĩ thể hiện:</label>
+                <input type="text" class="form-control" id="singer" th:field="*{singer}" maxlength="300" required pattern="^[^@;,.=+\-…]*$">
+                <p th:if="${#fields.hasErrors('singer')}" th:errors="*{singer}" style="color: red; font-style: italic"></p>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Thể loại nhạc:</label>
+                <input type="text" class="form-control" id="category" th:field="*{category}" maxlength="1000" required pattern="^[^@;,.=+\-…]*$">
+                <p th:if="${#fields.hasErrors('category')}" th:errors="*{category}" style="color: red; font-style: italic"></p>
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

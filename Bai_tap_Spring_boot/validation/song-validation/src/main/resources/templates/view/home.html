@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{common/common::bootstrap}"></th:block>
+</head>
+<body>
+<div class="container">
+    <h1>List Song</h1>
+    <p>
+        <a class="btn btn-success" style="float: left" th:href="@{/song_validation/create}">Add new Song</a>
+    </p>
+    <div class="notify" style="margin-top: 50px">
+        <p th:text="${message}"></p>
+    </div>
+    <table class="table table-dark table-hover" style="margin-top: 80px">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Name</th>
+                <th>Singer</th>
+                <th>Category</th>
+                <th>Edit Song</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="song,status:${songs}">
+                <td th:text="${status.count}"></td>
+                <td th:text="${song.nameSong}"></td>
+                <td th:text="${song.singer}"></td>
+                <td th:text="${song.category}"></td>
+                <td><a class="btn btn-warning" th:href="@{song_validation/{id}/edit(id=${song.getId()})}">Edit</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
