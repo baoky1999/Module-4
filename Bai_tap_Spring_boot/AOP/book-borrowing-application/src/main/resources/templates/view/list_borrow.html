@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{common/common::bootstrap}"></th:block>
+</head>
+<body>
+<div class="container">
+    <h1>Sách đang mượn</h1>
+    <p>
+        <a class="btn btn-primary" th:href="@{/home_book}">
+            Trở lại trang chủ
+        </a>
+    </p>
+    <form class="d-flex" action="home_book/give_book" method="post">
+        <input class="form-control me-2" type="search" name="code" placeholder="Search" aria-label="Search" pattern="^[0-9]{5}$">
+        <button class="btn btn-outline-success" type="submit">Trả sách</button>
+    </form>
+    <p th:text="${message}"></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Ảnh</th>
+                <th>Tên sách</th>
+                <th>Tác giả</th>
+                <th>Mã mượn sách</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="book, status: ${borrows}">
+                <td th:if="${book.borrow != null}" th:text="${status.count}"></td>
+                <td th:if="${book.borrow != null}"><img th:src="${book.image}" class="card-img-top" alt="Book Image"></td>
+                <td th:if="${book.borrow != null}" th:text="${book.name}"></td>
+                <td th:if="${book.borrow != null}" th:text="${book.author}"></td>
+                <td th:if="${book.borrow != null}" th:text="${book.borrow.code}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

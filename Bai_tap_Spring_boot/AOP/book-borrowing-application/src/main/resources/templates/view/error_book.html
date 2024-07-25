@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{common/common::bootstrap}"></th:block>
+</head>
+<body>
+<p>Mỗi tài khoảng chỉ được mượn 1 quyển sách cho mỗi loại</p>
+<p>
+    <a class="btn btn-primary" th:href="@{/home_book}">
+        Trở lại trang chủ
+    </a>
+</p>
+</body>
+</html>

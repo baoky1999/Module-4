@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Borrow Book</title>
+    <th:block th:replace="~{common/common::bootstrap}"></th:block>
+</head>
+<body>
+<div class="container">
+    <h3>Mượn sách</h3>
+    <p>
+        <a class="btn btn-primary" th:href="@{/home_book}">
+            Trở lại trang chủ
+        </a>
+    </p>
+    <div style="font-size: 20px; font-weight: bold">
+        <div class="cus-detail">
+            <label>Tên sách : </label>
+            <label th:text="${book.name}"></label>
+        </div>
+        <div class="cus-detail">
+            <label>Tên tác giả : </label>
+            <label th:text="${book.author}"></label>
+        </div>
+        <div class="cus-detail">
+            <label></label>
+            <img th:src="${book.image}" class="card-img-top" alt="Book Image">
+        </div>
+        <form action="#" method="post">
+            <button type="submit" class="btn btn-primary">Xác nhận mượn sách</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
