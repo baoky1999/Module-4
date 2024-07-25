@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart Product</title>
+    <th:block th:replace="~{common/common::bootstrap}"></th:block>
+</head>
+<body>
+<div class="container">
+    <nav th:replace="~{common/common::navba}"></nav>
+    <h1>Giỏ hàng của bạn</h1>
+    <form action="/product/pay" th:href="@{product/pay}" method="post">
+        <div class="row">
+            <div th:each="product : ${cartList}" class="col-md-3 mb-3">
+                <div class="card" style="height: 400px">
+                    <img th:src="${product.image}" class="card-img-top fixed-image" alt="Book Image"/>
+                    <div class="card-body d-flex flex-column">
+                        <span>Tên sản phẩm : </span><h5 class="card-title" th:text="${product.name}"></h5>
+                        <span>Giá tiền: </span><h5 class="card-price" th:text="${product.price}"></h5>
+                        <p>
+                            Số lượng:
+                            <input type="number" class="quantityDisplay" th:value="${product.quantity}" min="1"
+                                   name="quantity"/>
+                            <button type="button" class="btn btn-secondary btn-sm decrease-btn">-</button>
+                            <button type="button" class="btn btn-secondary btn-sm increase-btn">+</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <h4>Tổng giá tiền: <span id="totalPriceDisplay">0</span>đ</h4>
+            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Thanh toán
+            </button>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Xác nhận thanh toán</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Tổng giá tiền của đơn hàng : <span id="totalPriceDisplayPay">0</span>đ</h4>
+                        <p>Bạn có chắc chắn muốn thanh toán đơn hàng này không ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Hoàn tất thanh toán</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function updateTotalPrice() {
+        let totalPrice = 0;
+        document.querySelectorAll('.card').forEach(function(card) {
+            let price = parseFloat(card.querySelector('.card-price').textContent);
+            let quantity = parseInt(card.querySelector('.quantityDisplay').value);
+            totalPrice += price * quantity;
+        });
+        document.getElementById('totalPriceDisplay').textContent = totalPrice.toFixed(2);
+        document.getElementById('totalPriceDisplayPay').textContent = totalPrice.toFixed(2);
+    }
+
+    document.querySelectorAll('.decrease-btn').forEach(function(button) {
+        button.addEventListener('click', function() {
+            let input = button.parentElement.querySelector('.quantityDisplay');
+            let currentQuantity = parseInt(input.value);
+            if (currentQuantity > 1) {
+                currentQuantity--;
+                input.value = currentQuantity;
+                updateTotalPrice();
+            }
+        });
+    });
+
+    document.querySelectorAll('.increase-btn').forEach(function(button) {
+        button.addEventListener('click', function() {
+            let input = button.parentElement.querySelector('.quantityDisplay');
+            let currentQuantity = parseInt(input.value);
+            currentQuantity++;
+            input.value = currentQuantity;
+            updateTotalPrice();
+        });
+    });
+    updateTotalPrice();
+</script>
+
+</body>
+</html>
