@@ -24,10 +24,13 @@ public class RestBlogController {
     @GetMapping
     public ResponseEntity<?> getAllBlog() {
         List<Blog> blogs = blogService.findAllBlog();
+        if (blogs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<>(blogs,HttpStatus.OK);
     }
 
-    @GetMapping("{categoryId}")
+    @GetMapping("category/{id}")
     public ResponseEntity<?> getBlogByCategoryId(@PathVariable int categoryId) {
         List<Blog> blogs = blogService.findAllBlogByCategory(categoryId);
         if (blogs.isEmpty()) {
@@ -36,7 +39,7 @@ public class RestBlogController {
         return new ResponseEntity<>(blogs,HttpStatus.OK);
     }
 
-    @GetMapping("/blog/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getBlogById(@PathVariable int id) {
         Blog blog = blogService.findById(id).get();
         if (blog == null) {
