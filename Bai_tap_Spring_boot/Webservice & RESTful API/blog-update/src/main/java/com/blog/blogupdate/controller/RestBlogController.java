@@ -21,16 +21,7 @@ public class RestBlogController {
     @Autowired
     private IBlogService blogService;
 
-    @Autowired
-    private ICategoryService categoryService;
-
     @GetMapping
-    public ResponseEntity<?> getAllBlogCategory() {
-        List<Category> categories = categoryService.findAll();
-        return new ResponseEntity<>(categories,HttpStatus.OK);
-    }
-
-    @GetMapping("/find-all")
     public ResponseEntity<?> getAllBlog() {
         List<Blog> blogs = blogService.findAllBlog();
         return new ResponseEntity<>(blogs,HttpStatus.OK);
@@ -39,12 +30,18 @@ public class RestBlogController {
     @GetMapping("{categoryId}")
     public ResponseEntity<?> getBlogByCategoryId(@PathVariable int categoryId) {
         List<Blog> blogs = blogService.findAllBlogByCategory(categoryId);
+        if (blogs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<>(blogs,HttpStatus.OK);
     }
 
     @GetMapping("/detail/{id}")
     public ResponseEntity<?> getBlogById(@PathVariable int id) {
         Blog blog = blogService.findById(id).get();
+        if (blog == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<>(blog,HttpStatus.OK);
     }
 
