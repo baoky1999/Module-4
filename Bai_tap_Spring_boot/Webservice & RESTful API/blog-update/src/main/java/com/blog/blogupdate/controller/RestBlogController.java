@@ -36,7 +36,7 @@ public class RestBlogController {
         return new ResponseEntity<>(blogs,HttpStatus.OK);
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/blog/{id}")
     public ResponseEntity<?> getBlogById(@PathVariable int id) {
         Blog blog = blogService.findById(id).get();
         if (blog == null) {
