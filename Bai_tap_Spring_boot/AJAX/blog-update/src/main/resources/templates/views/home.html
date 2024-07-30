@@ -1,36 +1,38 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Blog</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous" async></script>
-    <style>
-        .th-container {
-            width: 250px;
-            display: flex;
-        }
-        .sort-form {
-            display: flex;
-        }
-        .sort-form select {
-            width: 80px;
-        }
-    </style>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Blog</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <script src="/ajax/page.js" defer></script>
+        <script src="/ajax/search.js" defer></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous" async></script>
+        <style>
+            .th-container {
+                width: 250px;
+                display: flex;
+            }
+            .sort-form {
+                display: flex;
+            }
+            .sort-form select {
+                width: 80px;
+            }
+        </style>
+    </head>
+    <body>
 <div class="container-fluid">
     <div>
         <h1>Blog Personal</h1>
         <p>
             <a class="btn btn-success" style="float: left" th:href="@{/blog/create}">Add new Blog</a>
 
-        <form class="d-flex" style="width: 400px; margin-left: 1000px" action="/blog" method="get">
-            <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" style="width: 400px; margin-left: 1000px" id="searchForm" method="get">
+            <input class="form-control me-2" type="search" id="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         </p>
@@ -41,7 +43,7 @@
         </div>
     </div>
     <div>
-        <table class="table table-striped">
+        <table class="table table-striped" id="results" >
             <thead>
             <tr>
                 <th>STT</th>
@@ -89,16 +91,17 @@
             </tbody>
         </table>
     </div>
-    <nav>
-        <ul class="pagination">
-            <li class="page-item" th:if="${blogList.hasPrevious()}">
-                <a class="page-link" th:href="@{blog(page=${blogList.number - 1},search=${search})}">Previous</a>
-            </li>
-            <li class="page-item" th:if="${blogList.hasNext()}">
-                <a class="page-link" th:href="@{blog(page=${blogList.number + 1},search=${search})}">Next</a>
-            </li>
-        </ul>
-    </nav>
+    <button type="button" id="loadMore" data-page="1">Tải thêm</button>
+<!--    <nav>-->
+<!--        <ul class="pagination">-->
+<!--            <li class="page-item" th:if="${blogList.hasPrevious()}">-->
+<!--                <a class="page-link" th:href="@{blog(page=${blogList.number - 1},search=${search})}">Previous</a>-->
+<!--            </li>-->
+<!--            <li class="page-item" th:if="${blogList.hasNext()}">-->
+<!--                <a class="page-link" th:href="@{blog(page=${blogList.number + 1},search=${search})}">Next</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
 <!--    <th:block th:replace="~{bootstrap::footter}"></th:block>-->
 </div>
 </body>

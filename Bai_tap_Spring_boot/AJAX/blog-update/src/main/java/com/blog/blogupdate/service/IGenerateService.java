@@ -18,5 +18,5 @@ public interface IGenerateService<T> {
 
     void remove(int id);
 
-    Page<T> findByTitle(String search, Pageable pageable);
+    Page<T> findByTitle( Pageable pageable);
 }

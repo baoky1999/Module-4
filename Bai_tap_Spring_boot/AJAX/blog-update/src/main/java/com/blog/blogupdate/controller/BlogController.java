@@ -27,8 +27,7 @@ public class BlogController {
     private CategoryService categoryService;
 
     @GetMapping
-    public String showList(@RequestParam(value = "search", defaultValue = "") String search,
-                           @RequestParam(value = "page", defaultValue = "0") int page,
+    public String showList(@RequestParam(value = "page", defaultValue = "0") int page,
                            @RequestParam(value = "sort", defaultValue = "") String sortTime,
                            @RequestParam(value = "category", defaultValue = "0") int category,
                            Model model) {
@@ -45,17 +44,16 @@ public class BlogController {
                     blogList = blogService.findAll(PageRequest.of(page, 3));
                 } else if (sortTime.equals("asc")) {
                     Sort sort = Sort.by("createDate").ascending();
-                    blogList = blogService.findByTitle(search, PageRequest.of(page, 3, sort));
+                    blogList = blogService.findAllSort( PageRequest.of(page, 3, sort));
                 } else {
                     Sort sort = Sort.by("createDate").descending();
-                    blogList = blogService.findByTitle(search, PageRequest.of(page, 3, sort));
+                    blogList = blogService.findAllSort( PageRequest.of(page, 3, sort));
                 }
                 break;
         }
 
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categorys", categories);
-        model.addAttribute("search", search);
         model.addAttribute("blogList", blogList);
         return "views/home";
     }
